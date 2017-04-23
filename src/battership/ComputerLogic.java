@@ -52,17 +52,28 @@ public class ComputerLogic {
 				LeftGridPlayer.onHit(x1, y1);
 			}else{
 				if(n == 0){
+					try{
 					x1 = currentShip.activeCells.get(hitpos-1)[0];
 					y1 = currentShip.activeCells.get(hitpos-1)[1];
 					LeftGridPlayer.onHit(x1, y1);
+					}catch(IndexOutOfBoundsException e){
+						System.out.println(e.getMessage() + "@ComputerLogic.AfterHit - 60");
+						x1 = currentShip.activeCells.get(hitpos+1)[0];
+						y1 = currentShip.activeCells.get(hitpos+1)[1];
+						LeftGridPlayer.onHit(x1, y1);
+					}
 				}else if(n == 1){
+					try{
 					x1 = currentShip.activeCells.get(hitpos+1)[0];
 					y1 = currentShip.activeCells.get(hitpos+1)[1];
 					LeftGridPlayer.onHit(x1, y1);
+					}catch(IndexOutOfBoundsException e){
+						System.out.println(e.getMessage() +  "@Computer Logic.AfterHit- 71");
+						x1 = currentShip.activeCells.get(hitpos-1)[0];
+						y1 = currentShip.activeCells.get(hitpos-1)[1];
+						LeftGridPlayer.onHit(x1, y1);
+					}
 				}
-			}
-			if(currentShip.getShipHits() == currentShip.getLength()){
-				LeftGridPlayer.onSunk(currentShip);
 			}
 		}else{
 			try{

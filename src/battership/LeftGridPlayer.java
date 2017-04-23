@@ -289,8 +289,11 @@ public class LeftGridPlayer {
 	public static void onHit(int x, int y){
 		button[x][y].setBackground(Color.red);
 		BSVariables.playerGrid[x][y] = 2;
-		ShipContents.getPlayerShipfromcell(false);
-		ComputerLogic.playerTurn = true;		
+		Ship sh = ShipContents.getPlayerShipfromcell(false);
+		ComputerLogic.playerTurn = true;	
+		if(sh.getShipHits() == sh.getLength()){
+			LeftGridPlayer.onSunk(sh);
+		}
 	}
 	public static void onMiss(int x, int y){
 		button[x][y].setBackground(Color.gray);
@@ -314,6 +317,7 @@ public class LeftGridPlayer {
 			System.out.println("Exception found at function onSunk: " + e.getMessage());
 		}
 		ShipContents.playerShipsTotal--;
+		ComputerLogic.lastHit.clear();
 		ComputerLogic.compHit = false;
 		ComputerLogic.playerTurn = true;
 	}

@@ -21,9 +21,12 @@ public class ShipContents {
 		allPlayerDestroyers.add(o);
 	}
 	public static int playerShipsTotal;
-
-	public static Ship getPlayerShipfromcell(boolean shiphit ){ //Function for Computer detection of ship objects.
+/*
+ * getPlayerShipfromcell is used by the computer to detect which ship object has just been hit, as the random hits picks a random live cell and not a ship.
+ */
+	public static Ship getPlayerShipfromcell(boolean shiphit){ //Function for Computer detection of ship objects.
 		if(BSVariables.debug == true){
+			System.out.println(BSVariables.getTime());
 			System.out.println("Searching for ship coords");
 			System.out.println("DS: " + allPlayerDestroyers.size());
 			System.out.println("CR: " + allPlayerCruisers.size());
@@ -35,14 +38,17 @@ public class ShipContents {
 		int y1 = ComputerLogic.lastHit.get(0)[1];
 		System.out.println("Finding ship");		
 		while(true){
+			/*
+			 * The following lines scan through all the Ship Object arrays to find the one which has the last hit coordinates.
+			 */
 			if(allPlayerDestroyers.size() == 1){
 				currentShip = allPlayerDestroyers.get(0);
 				if(scanShips(x1,y1,currentShip, shiphit) == true){
 					return currentShip;
 				}
 			}else{
-				for(int x = 0; x <= allPlayerDestroyers.size(); x++){ //Opens the Destroyer array
-					currentShip = allPlayerDestroyers.get(x); //Calls the individual ship Object from the array
+				for(int x = 0; x <= allPlayerDestroyers.size(); x++){ 
+					currentShip = allPlayerDestroyers.get(x); 
 					if(scanShips(x1,y1,currentShip, shiphit) == true){
 						return currentShip;
 					}
@@ -54,40 +60,41 @@ public class ShipContents {
 					return currentShip;
 				}
 			}else{
-				for(int x = 0; x <= allPlayerCruisers.size(); x++){ //Opens the Destroyer array
-					currentShip = allPlayerCruisers.get(x); //Calls the individual ship Object from the array
-					if(scanShips(x1,y1,currentShip, shiphit) == true){
-						return currentShip;
-					}
-				}
-			}if(allPlayerBattleships.size() == 1){
-				currentShip = allPlayerBattleships.get(0); //Calls the individual ship Object from the array
-				if(scanShips(x1,y1,currentShip, shiphit) == true){
-					return currentShip;
-				}
-			}
-			else{
-				for(int x = 0; x <= allPlayerBattleships.size(); x++){ //Opens the Destroyer array
-					currentShip = allPlayerBattleships.get(x); //Calls the individual ship Object from the array
-					if(scanShips(x1,y1,currentShip, shiphit) == true){
-						return currentShip;
-					}
-				}	
-			}
-			if(allPlayerCarriers.size() == 1){
-				currentShip = allPlayerCarriers.get(0); //Calls the individual ship Object from the array
-				if(scanShips(x1,y1,currentShip, shiphit) == true){
-					return currentShip;
-				}
-			}else{
-				for(int x = 0; x <= allPlayerCarriers.size(); x++){ //Opens the Destroyer array
-					currentShip = allPlayerCarriers.get(x); //Calls the individual ship Object from the array
+				for(int x = 0; x <= allPlayerCruisers.size(); x++){ 
+					currentShip = allPlayerCruisers.get(x); 
 					if(scanShips(x1,y1,currentShip, shiphit) == true){
 						return currentShip;
 					}
 				}
 			}
-			System.out.println("Err");	
+//			if(allPlayerBattleships.size() == 1){
+//				currentShip = allPlayerBattleships.get(0); //Calls the individual ship Object from the array
+//				if(scanShips(x1,y1,currentShip, shiphit) == true){
+//					return currentShip;
+//				}
+//			}
+//			else{
+//				for(int x = 0; x <= allPlayerBattleships.size(); x++){ //Opens the Destroyer array
+//					currentShip = allPlayerBattleships.get(x); //Calls the individual ship Object from the array
+//					if(scanShips(x1,y1,currentShip, shiphit) == true){
+//						return currentShip;
+//					}
+//				}	
+//			}
+//			if(allPlayerCarriers.size() == 1){
+//				currentShip = allPlayerCarriers.get(0); //Calls the individual ship Object from the array
+//				if(scanShips(x1,y1,currentShip, shiphit) == true){
+//					return currentShip;
+//				}
+//			}else{
+//				for(int x = 0; x <= allPlayerCarriers.size(); x++){ //Opens the Destroyer array
+//					currentShip = allPlayerCarriers.get(x); //Calls the individual ship Object from the array
+//					if(scanShips(x1,y1,currentShip, shiphit) == true){
+//						return currentShip;
+//					}
+//				}
+//			}
+			System.out.println(BSVariables.getTime() + " - Error in ShipContents.getShipfromarray");	
 		}
 	}
 	private static boolean scanShips(int x1, int y1,Ship currentShip, boolean shiphit){
@@ -96,7 +103,7 @@ public class ShipContents {
 		for(int i = 0; i < currentShip.activeCells.size(); i++){
 			x = currentShip.activeCells.get(i)[0];
 			y = currentShip.activeCells.get(i)[1];
-			System.out.println("Trying: " + currentShip.getName()+ " x " + x + " y " + y);
+			System.out.println("Trying: " + currentShip.getName()+ " x: " + x + " y: " + y);
 			System.out.println(x1 + " " + x+ "  " + y1 + " " + y);
 			if(x == x1 && y == y1){
 				System.out.println("Found ship: " + currentShip.getType() + " " + currentShip.getName());
@@ -105,11 +112,13 @@ public class ShipContents {
 				System.out.println("Ship hits: " + currentShip.getShipHits());
 				if(currentShip.getShipHits() == currentShip.getLength()){
 					LeftGridPlayer.onSunk(currentShip);
-					return true;
 				}
 				}return true;
-			}
-		}return false;
+			}else{
+				continue;
+		}
+		}
+		return false;
 	}
 	public static ArrayList<Object> allCompCarriers = new ArrayList<Object>();
 	public static ArrayList<Object> allCompBattleships = new ArrayList<Object>();

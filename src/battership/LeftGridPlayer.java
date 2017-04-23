@@ -289,9 +289,8 @@ public class LeftGridPlayer {
 	public static void onHit(int x, int y){
 		button[x][y].setBackground(Color.red);
 		BSVariables.playerGrid[x][y] = 2;
-		ComputerLogic.playerTurn = true;
 		ShipContents.getPlayerShipfromcell(false);
-		
+		ComputerLogic.playerTurn = true;		
 	}
 	public static void onMiss(int x, int y){
 		button[x][y].setBackground(Color.gray);
@@ -312,7 +311,7 @@ public class LeftGridPlayer {
 			}
 		}
 		catch(Exception e){
-			System.out.print("Exception found at function onSunk: " + e.getMessage());
+			System.out.println("Exception found at function onSunk: " + e.getMessage());
 		}
 		ShipContents.playerShipsTotal--;
 		ComputerLogic.compHit = false;
@@ -331,6 +330,7 @@ public class LeftGridPlayer {
 		d.setActiveCells(coord);
 		ShipContents.addPlayerDestroyers(d);
 		if(BSVariables.debug == true){
+			System.out.println(BSVariables.getTime());
 			System.out.println("Ship added: " + d.getType());
 			System.out.println("Cellsactivated: " + coord.size());
 			System.out.println("At coords:");
@@ -382,6 +382,7 @@ public class LeftGridPlayer {
 		c.setActiveCells(coord);
 		ShipContents.addPlayerCruisers(c);
 		if(BSVariables.debug == true){
+			System.out.println(BSVariables.getTime());
 			System.out.println("Ship added: " + c.getType());
 			System.out.println("Cellsactivated: " + coord.size());
 			System.out.println("At coords:");
@@ -435,6 +436,7 @@ public class LeftGridPlayer {
 		b.setActiveCells(coord);
 		ShipContents.addPlayerBattleships(b);
 		if(BSVariables.debug == true){
+			System.out.println(BSVariables.getTime());
 			System.out.println("Ship added: " + b.getType());
 			System.out.println("Cellsactivated: " + coord.size());
 			System.out.println("At coords:");
@@ -507,6 +509,7 @@ public class LeftGridPlayer {
 		ca.setActiveCells(coord);
 		ShipContents.addPlayerCarriers(ca);
 		if(BSVariables.debug == true){
+			System.out.println(BSVariables.getTime());
 			System.out.println("Ship added: " + ca.getType());
 			System.out.println("Cellsactivated: " + coord.size());
 			System.out.println("At coords:");
@@ -579,7 +582,8 @@ public class LeftGridPlayer {
 	}
 	public static void CheckAllShipstoStartGame(){
 		if(carrier == 0 && battleship == 0 && cruiser == 0 && destroyer == 0){
-			System.out.println("All ship count 0");
+			System.out.println(BSVariables.getTime());
+			System.out.println("Starting Game");
 			BSVariables.playingGame = true;
 			ComputerLogic.playerTurn = true;
 		}

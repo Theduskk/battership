@@ -25,10 +25,10 @@ public class BSVariables {
 	 * 	this level has been set for both teams.
 	 * 	can be modified in the settings tab.
 	 */
-	public static int carrier = 1; //Default 3
-	public static int battleship = 1; //Default 4
-	public static int cruiser = 1; //Default 5
-	public static int destroyer = 1; //Default 6
+	public static int carrier = 0; //Default 3
+	public static int battleship = 0; //Default 4
+	public static int cruiser = 2; //Default 5
+	public static int destroyer = 0; //Default 6
 	/*
 	 * Array lists to contain the information behind the active location
 	 * of the ships in play.

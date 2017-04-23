@@ -54,8 +54,8 @@ public class PrimeWindow {
 				}
 			}
 		}catch(Exception e){
-			System.out.print("Panel reset err:");
-			System.out.print(e.getMessage());
+			System.out.println("Panel reset err:");
+			System.out.println(e.getMessage());
 		}
 		System.out.println(BSVariables.getTime() + "Panels reset complete");
 		main.add(PrimPanel);

@@ -9,10 +9,9 @@ public class ComputerLogic {
 	protected static boolean compPreviousHit = false;
 	protected static boolean playerTurn= false;
 	public static ArrayList<int[]> lastHit = new ArrayList<int[]>();
+	private static int hitpos;
 	private static int size = BSVariables.gridSize;
 	public static int totalComputerHits = 0;
-	private static int x1;
-	private static int y1;
 	public static int randomCoord(){
 		Random rand = new Random();
 		int ran = rand.nextInt(size);
@@ -32,28 +31,38 @@ public class ComputerLogic {
 		 */
 		if(ran < BSVariables.diffLevel){ //Computer hit ship
 			int x1 = 0;
-			int y1 = 0;
-			
+			int y1 = 0;	
+			int n =  (int) Math.floor(Math.random()*2);
 			for(int i = 0; i < currentShip.activeCells.size(); i++){
 				x1 = currentShip.activeCells.get(i)[0];
 				y1 = currentShip.activeCells.get(i)[1];
 				if(x == x1 && y == y1){
-					continue;
-				}else if((x - x1) > 1 | (x - x1) < 0){
-					LeftGridPlayer.onHit(x1, y);
-					break;
-				}else if((y - y1) > 1 | (y - y1) < 0){
-					LeftGridPlayer.onHit(x, y1);
-					break;
+					hitpos = i;
 				}else{
+					continue;
+				}
+			}
+			if(hitpos == 0){
+				x1 = currentShip.activeCells.get(1)[0];
+				y1 = currentShip.activeCells.get(1)[1];
+				LeftGridPlayer.onHit(x1, y1);
+			}else if(hitpos == currentShip.getLength()){
+				x1 = currentShip.activeCells.get(hitpos-1)[0];
+				y1 = currentShip.activeCells.get(hitpos-1)[1];
+				LeftGridPlayer.onHit(x1, y1);
+			}else{
+				if(n == 0){
+					x1 = currentShip.activeCells.get(hitpos-1)[0];
+					y1 = currentShip.activeCells.get(hitpos-1)[1];
+					LeftGridPlayer.onHit(x1, y1);
+				}else if(n == 1){
+					x1 = currentShip.activeCells.get(hitpos+1)[0];
+					y1 = currentShip.activeCells.get(hitpos+1)[1];
 					LeftGridPlayer.onHit(x1, y1);
 				}
-				if(currentShip.getShipHits() == currentShip.getLength()){
-					LeftGridPlayer.onSunk(currentShip);
-					break;
-				}else{
-					break;
-				}
+			}
+			if(currentShip.getShipHits() == currentShip.getLength()){
+				LeftGridPlayer.onSunk(currentShip);
 			}
 		}else{
 			try{

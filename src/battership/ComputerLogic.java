@@ -90,6 +90,8 @@ public class ComputerLogic {
 					LeftGridPlayer.onMiss(x, y-1);
 				}
 			}
+		}if(currentShip.getShipHits() >= currentShip.getLength()){
+			LeftGridPlayer.onSunk(currentShip);
 		}
 	}
 	public static boolean blindFire(){
@@ -492,6 +494,7 @@ public class ComputerLogic {
 		ComputerLogic.placeBattleships();
 		ComputerLogic.placeCruisers();
 		ComputerLogic.placeDestroyers();
+		PrimeWindow.updateCompShipsPanel();
 		if(BSVariables.debug == true){
 			System.out.println(ShipContents.computerShipsTotal() + " computer ships have been created");
 		}

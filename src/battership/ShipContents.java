@@ -139,23 +139,24 @@ public class ShipContents {
 		}
 		return false;
 	}
-	public static ArrayList<Object> allCompCarriers = new ArrayList<Object>();
-	public static ArrayList<Object> allCompBattleships = new ArrayList<Object>();
-	public static ArrayList<Object> allCompCruisers = new ArrayList<Object>();
-	public static ArrayList<Object> allCompDestroyers = new ArrayList<Object>();
+	public static ArrayList<Ship> allCompCarriers = new ArrayList<Ship>();
+	public static ArrayList<Ship> allCompBattleships = new ArrayList<Ship>();
+	public static ArrayList<Ship> allCompCruisers = new ArrayList<Ship>();
+	public static ArrayList<Ship> allCompDestroyers = new ArrayList<Ship>();
 
 
-	public static void addCompCarrier(Object o){
+	public static void addCompCarrier(Ship o){
 		allCompCarriers.add(o);
 	}
-	public static void addCompBattleships(Object o){
-		allCompCarriers.add(o);
+	public static void addCompBattleships(Ship o){
+
+		allCompBattleships.add(o);
 	}
-	public static void addCompCruisers(Object o){
-		allCompCarriers.add(o);
+	public static void addCompCruisers(Ship o){
+		allCompCruisers.add(o);
 	}
-	public static void addCompDestroyers(Object o){
-		allCompCarriers.add(o);
+	public static void addCompDestroyers(Ship o){
+		allCompDestroyers.add(o);
 	}
 	public static int computerShipsTotal(){
 		int a = allCompCarriers.size() + allCompBattleships.size() + allCompCruisers.size() + allCompDestroyers.size();

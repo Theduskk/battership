@@ -14,6 +14,8 @@ public class PrimeWindow {
 
 	final static JFrame main = new JFrame("BanterShip");
 	private static Component PrimPanel = PrimeWindow.createGrids();
+	private static JPanel compCurrentShips = new JPanel();
+	public static JLabel compCounter = new JLabel();
 
 	public static void mainFrame(){
 		JMenuBar bar = Menutab.mainMenu();
@@ -63,7 +65,8 @@ public class PrimeWindow {
 	public static Component getShips(){
 		JPanel pane = new JPanel(new GridLayout(1,2));
 		pane.add(PrimeWindow.listedPlayerShips());
-		pane.add(PrimeWindow.listedComputerShips());
+		listedComputerShips();
+		pane.add(PrimeWindow.compCurrentShips);
 		pane.setBackground(new Color(91,162,255));
 		return pane;
 	}
@@ -80,18 +83,15 @@ public class PrimeWindow {
 		}
 		return currentShips;
 	}
-	public static Component listedComputerShips(){
+	public static void listedComputerShips(){
 		JPanel currentShips = new JPanel(new GridLayout(3,4,15,15));
 		currentShips.setBackground(new Color(91,162,255));
-		currentShips.add(new JLabel("Computer Ships total: " + ShipContents.computerShipsTotal()));
 		currentShips.add(new JLabel(""));
-		String[] shipList = {"carrier","battleship","cruiser","destroyer"};
-		int[] shipObjectList = {ShipContents.allCompCarriers.size(), ShipContents.allCompBattleships.size(), ShipContents.allCompCruisers.size(),ShipContents.allCompDestroyers.size()};
-		for(int x = 0; x < shipList.length; x++){
-			JLabel label = new JLabel("" + shipList[x] + ": " + shipObjectList[x]);
-			label.setName(shipList[x]);
-			currentShips.add(label);
-		}
-		return currentShips;
+		JLabel compCounter = new JLabel("Total Computer Ships: " + ShipContents.computerShipsTotal());
+		currentShips.add(compCounter);
+		compCurrentShips = currentShips;
+	}
+	public static void updateCompShipsPanel(){
+		compCounter.setText("Total Computer Ships: " + ShipContents.computerShipsTotal());
 	}
 }

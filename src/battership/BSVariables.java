@@ -25,10 +25,10 @@ public class BSVariables {
 	 * 	this level has been set for both teams.
 	 * 	can be modified in the settings tab.
 	 */
-	public static int carrier = 1; //Default 3
-	public static int battleship = 1; //Default 4
-	public static int cruiser = 1; //Default 5
-	public static int destroyer = 1; //Default 6
+	public static int carrier = 1; //Default 1
+	public static int battleship = 2; //Default 2
+	public static int cruiser = 3; //Default 3
+	public static int destroyer = 4; //Default 4
 	/*
 	 * Array lists to contain the information behind the active location
 	 * of the ships in play.
@@ -36,11 +36,11 @@ public class BSVariables {
 
 	protected static boolean playingGame = false;
 
-	
+
 	public static String getTime(){
-        Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-        String str = sdf.format(cal.getTime()) + "-";
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+		String str = sdf.format(cal.getTime()) + "-";
 		return str;
 	}
 	public static int getShips(String x) {
@@ -58,19 +58,19 @@ public class BSVariables {
 	}
 	public static void setShips(String x, int i) {
 		try{
-		if(x.equalsIgnoreCase("carrier")){
-			carrier = i;
-		}else if(x.equalsIgnoreCase("battleship")){
-			battleship = i;
-		}else if(x.equalsIgnoreCase("cruiser")){
-			cruiser = i;
-		}else if(x.equalsIgnoreCase("destroyer")){
-			destroyer = i;
+			if(x.equalsIgnoreCase("carrier")){
+				carrier = i;
+			}else if(x.equalsIgnoreCase("battleship")){
+				battleship = i;
+			}else if(x.equalsIgnoreCase("cruiser")){
+				cruiser = i;
+			}else if(x.equalsIgnoreCase("destroyer")){
+				destroyer = i;
+			}
+			System.out.println(BSVariables.getTime()+ x + " level set: " + i);
+		}catch(Exception e){
+			System.out.println(e.getMessage());
 		}
-		System.out.println("Err BSVariables setShips");
-	}catch(Exception e){
-		System.out.println(e.getMessage());
-	}
 	}
 	public static void gridsInitialise(){
 		playerGrid = new int[gridSize][gridSize];
